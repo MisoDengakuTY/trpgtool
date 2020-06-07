@@ -13,12 +13,12 @@ import 'rsuite/dist/styles/rsuite-default.css';
 
 import SideBar from './otherComponent/SideBar';
 
-import Home from './pages/Home';
-import CoC from './pages/CoC';
-import Shinobigami from './pages/Shinobigami';
-import Insane from './pages/Insane';
-import Dice from './pages/Dice';
-import Load from './pages/Load';
+import Home from './pages/home/Home';
+import CoC from './pages/coc/CoC';
+import Shinobigami from './pages/shinobigami/Shinobigami';
+import Insane from './pages/insane/Insane';
+import Dice from './pages/dice/Dice';
+import Load from './pages/load/Load';
 
 
 
@@ -34,22 +34,10 @@ const App : React.FC = () => {
           <Route path="/shinobigami" exact children={<Shinobigami />} />
           <Route path="/insane" children={<Insane />} />
           <Route path="/dice" children={<Dice />} />
+          <Route path="/load" children={<Load />} />
+
         </Switch>
       </Router>
-{/*       <Router>
-        <div>
-          <ul>
-            <li><Link to="/">Home</Link></li>
-          </ul>
-
-          <hr/>
-
-          <Switch>
-            <Route exact path="/" component={Home}/>
-          </Switch>
-        </div>
-      </Router>
- */}
 
     </div>
   );
