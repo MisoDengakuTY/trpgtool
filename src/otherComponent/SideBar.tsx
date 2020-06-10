@@ -1,65 +1,42 @@
-import React from 'react'
-import { Navbar,Nav,Icon,Dropdown } from 'rsuite';
+import React from 'react';
+import { Sidenav,Nav,Dropdown,Icon } from 'rsuite';
 
-interface ItemsType {
-  name: string,
-  label: string
-}
-
-interface PropsType{
-  Items : Array<ItemsType>
-}
-
-/* 
-const getListItem = (item:ItemsType) =>{
-  return(
-    <ListItem button key = {item.name}>
-      <ListItemText> {item.label} </ListItemText>
-    </ListItem>
-  )
-}
-
- */
 const SideBar = () => {
-
-  const items : Array<ItemsType> = [
-    { name: 'home', label: 'Home' },
-    { name: 'billing', label: 'Billing' },
-    { name: 'settings', label: 'Settings' },
-  ]
-
-  return (
-    <Navbar>
-    <Navbar.Body>
-      <Nav>
-        <Nav.Item icon={<Icon icon="home" />} href = '/'>Home</Nav.Item>
-        <Dropdown title="New">
-          <Dropdown.Item href = '/coc'>クトゥルフ神話TRPG</Dropdown.Item>
-          <Dropdown.Item href = '/shinobigami'>シノビガミ</Dropdown.Item>
-          <Dropdown.Item href = '/insane'>インセイン</Dropdown.Item>
-        </Dropdown>
-        <Nav.Item href = '/load'>Load</Nav.Item>
-        <Nav.Item href = '/dice'>Dice</Nav.Item>
-
-      </Nav>
-      <Nav pullRight>
-        <Nav.Item icon={<Icon icon="cog" />} >Settings</Nav.Item>
-      </Nav>
-    </Navbar.Body>
-  </Navbar>
-  )
+    return(
+        <div style={{ width: 250 }}>
+        <Sidenav defaultOpenKeys={['3', '4']} activeKey="1">
+          <Sidenav.Body>
+            <Nav>
+              <Nav.Item eventKey="1" icon={<Icon icon="dashboard" />}>
+                Dashboard
+              </Nav.Item>
+              <Nav.Item eventKey="2" icon={<Icon icon="group" />}>
+                User Group
+              </Nav.Item>
+              <Dropdown eventKey="3" title="Advanced" icon={<Icon icon="magic" />}>
+                <Dropdown.Item eventKey="3-1">Geo</Dropdown.Item>
+                <Dropdown.Item eventKey="3-2">Devices</Dropdown.Item>
+                <Dropdown.Item eventKey="3-3">Loyalty</Dropdown.Item>
+                <Dropdown.Item eventKey="3-4">Visit Depth</Dropdown.Item>
+              </Dropdown>
+              <Dropdown
+                eventKey="4"
+                title="Settings"
+                icon={<Icon icon="gear-circle" />}
+              >
+                <Dropdown.Item eventKey="4-1">Applications</Dropdown.Item>
+                <Dropdown.Item eventKey="4-2">Channels</Dropdown.Item>
+                <Dropdown.Item eventKey="4-3">Versions</Dropdown.Item>
+                <Dropdown.Menu eventKey="4-5" title="Custom Action">
+                  <Dropdown.Item eventKey="4-5-1">Action Name</Dropdown.Item>
+                  <Dropdown.Item eventKey="4-5-2">Action Params</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+            </Nav>
+          </Sidenav.Body>
+        </Sidenav>
+      </div>
+    )
 }
-/* 
-const SideBarMake : React.FC<PropsType> = (props) => {
-  return(
-    <div className="sidenav">
-      <List disablePadding dense>
-        
-        {props.Items.map(item => getListItem(item))}
-
-      </List>
-    </div>
-  )
-} */
 
 export default SideBar;
