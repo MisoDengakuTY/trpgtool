@@ -61,6 +61,10 @@
     ]
   },
   "devDependencies": {
+    "@graphql-codegen/introspection": "1.15.3",
+    "@graphql-codegen/typescript": "^1.15.3",
+    "@graphql-codegen/typescript-operations": "1.15.3",
+    "@graphql-codegen/typescript-react-apollo": "1.15.3",
     "concurrently": "^5.2.0",
     "electron": "^9.0.4",
     "electron-builder": "^22.7.0",
