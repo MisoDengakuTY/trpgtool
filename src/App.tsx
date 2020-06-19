@@ -28,11 +28,10 @@ const Routing = () =>{
     <Switch>
       <Route path="/" exact children={<Home />} />
       <Route path="/coc" children={<CoC />} />
-      <Route path="/shinobigami" exact children={<Shinobigami />} />
+      <Route path="/shinobigami" children={<Shinobigami />} />
       <Route path="/insane" children={<Insane />} />
       <Route path="/dice" children={<Dice />} />
       <Route path="/load" children={<Load />} />
-
     </Switch>
   </Router>
   )
@@ -49,8 +48,7 @@ const App : React.FC = () => {
       <Sidebar><SideBar /></Sidebar>
       <Content><Routing /></Content>
       </Container>
-      
-    </Container>
+      </Container>
 
     </div>
   );

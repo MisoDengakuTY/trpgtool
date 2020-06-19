@@ -2,19 +2,20 @@ import React from 'react';
 import { InputNumber, Input} from 'rsuite';
 
 interface status{
-    STR : Number;
-    CON : Number;
-    POW : Number;
-    DEX : Number;
-    APP : Number;
-    SIZE : Number;
-    INT : Number;
-    EDU : Number;
+    STR : number;
+    CON : number;
+    POW : number;
+    DEX : number;
+    APP : number;
+    SIZE : number;
+    INT : number;
+    EDU : number;
 }
 
 const Status = () =>{
     const styles = { 
-        marginBottom: 10 ,}
+        marginBottom: 10 }
+
     const data =  {
         STR : "13",
         CON : "13",
@@ -29,7 +30,6 @@ const Status = () =>{
     return(
     <div className = "statusTable">
     <table>
-
     <th className="tableLeft">  </th>
     <th>STR</th>
     <th>CON</th>
@@ -39,9 +39,9 @@ const Status = () =>{
     <th>SIZE</th>
     <th>INT</th>
     <th>EDU</th>
-    <tr>
+    <tr>    
 
-    <td>初期値</td>
+    <td>初期値</td> 
     <td><InputNumber style={styles} placeholder="STR"  max={18} min={2} /> </td>
     <td><InputNumber style={styles} placeholder="CON"  max={18} min={2} /> </td>
     <td><InputNumber style={styles} placeholder="POW"  max={18} min={2} /> </td>
