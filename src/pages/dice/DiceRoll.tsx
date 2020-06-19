@@ -39,10 +39,10 @@ const DiceRoll = () =>{
           </ButtonToolbar>
           <Modal size={state.size} show={state.show} onHide={() => setState({size:undefined,show:false})}>
             <Modal.Header>
-              <Modal.Title>Modal Title</Modal.Title>
+              <Modal.Title>Dice Roll</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-            {dice}
+            {dice.join(", ")} => {dice.reduce(function (accumulator, currentValue) {return accumulator + currentValue}, 0)}
             </Modal.Body>
             <Modal.Footer>
               <Button onClick={() => setState({size:undefined,show:false})} appearance="primary">

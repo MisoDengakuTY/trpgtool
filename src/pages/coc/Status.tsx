@@ -66,7 +66,7 @@ const Status = () =>{
 
     <tr>
     <td className="tableLeft">現在値</td>
-    <td> {data.STR} </td>
+    <td> <Input value={data.STR} disabled /> </td>
     <td> <Input value={data.CON} disabled /> </td>
     <td> <Input value={data.POW} disabled /> </td>
     <td> <Input value={data.DEX} disabled /> </td>

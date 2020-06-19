@@ -2,7 +2,7 @@ import React from 'react';
 import { InputNumber, Input} from 'rsuite';
 
 interface status{
-    SAN : Number
+    SAN : number
 }
 
 const San = () => {
