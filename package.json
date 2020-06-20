@@ -46,7 +46,8 @@
     "postinstall": "electron-builder install-app-deps",
     "electron:dev": "concurrently \"cross-env BROWSER=none && yarn start\" \"wait-on http://localhost:3000 && tsc -p electron -w\" \"wait-on http://localhost:3000 && tsc -p electron && electron .\"",
     "electron:windev": "concurrently \"cross-env BROWSER=none && yarn start\" \"wait-on http://localhost:3000 && tsc -p electron -w\" \"wait-on http://localhost:3000 && tsc -p electron && electron .\"",
-    "electron:build": "yarn build && tsc -p electron && electron-builder"
+    "electron:build": "yarn build && tsc -p electron && electron-builder",
+    "qlgen": "graphql-codegen --config codegen.yml"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -64,10 +65,11 @@
     ]
   },
   "devDependencies": {
-    "@graphql-codegen/introspection": "1.15.3",
-    "@graphql-codegen/typescript": "^1.15.3",
-    "@graphql-codegen/typescript-operations": "1.15.3",
-    "@graphql-codegen/typescript-react-apollo": "1.15.3",
+    "@graphql-codegen/cli": "1.15.4",
+    "@graphql-codegen/introspection": "1.15.4",
+    "@graphql-codegen/typescript": "1.15.4",
+    "@graphql-codegen/typescript-operations": "1.15.4",
+    "@graphql-codegen/typescript-react-apollo": "1.15.4",
     "concurrently": "^5.2.0",
     "electron": "^9.0.4",
     "electron-builder": "^22.7.0",
