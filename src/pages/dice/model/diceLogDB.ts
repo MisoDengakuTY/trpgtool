@@ -16,4 +16,8 @@ export default class diceLogDB {
         this.results = results;
         this.rollAt = rollAt;
     }
+
+    public resultSum(): number {
+        return this.results.reduce((s, x) => s + x, 0);
+    }
 }

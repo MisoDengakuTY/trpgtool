@@ -15,7 +15,7 @@ const Dice = () => {
         <div className="Dice">
         <h1> Dice </h1>
         <DiceRoll onRoll={(log: DiceLogDB) => {setLogs(logs.concat([log]))}} />
-        <Button onClick={() => setOrdering(!newToPast)}>{newToPast ? "古い順" : "新しい順"}</Button>
+        <Button onClick={() => setOrdering(!newToPast)}>{newToPast ? "古い順にする" : "新しい順にする"}</Button>
         <DiceLog logs={logs} newToPast={newToPast}/>
         </div>
     )

@@ -17,7 +17,7 @@ const DiceLog = (prop: DiceLogProp) => {
     
     // ログデータをコンポーネントに変換する関数
     const log2component = (l : diceLogDB) => 
-        (<Timeline.Item key={l.id}>{date2str(l.rollAt)} {l.count}D{l.dicesize} {"=>"} {result2str(l.results)}</Timeline.Item>)
+    (<Timeline.Item key={l.id}>{date2str(l.rollAt)} {l.count}D{l.dicesize} {"=>"} {l.resultSum()}({result2str(l.results)})</Timeline.Item>)
 
     const sortedLog = prop.newToPast ? prop.logs.sort((x, y) => y.rollAt.getTime() - x.rollAt.getTime())
                                      : prop.logs.sort((x, y) => x.rollAt.getTime() - y.rollAt.getTime());
