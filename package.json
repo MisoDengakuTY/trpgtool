@@ -25,7 +25,8 @@
     "react-scripts": "3.4.1",
     "rsuite": "^4.7.2",
     "semantic-ui-react": "^0.88.2",
-    "typescript": "~3.7.2"
+    "typescript": "~3.7.2",
+    "urql": "^1.9.8"
   },
   "homepage": "./",
   "main": "build/electron/main.js",
@@ -49,7 +50,6 @@
     "electron:build": "yarn build && tsc -p electron && electron-builder",
     "qlgen": "graphql-codegen --config ./codegen.yml",
     "testqlgen": "graphql-codegen --config ./testDirGraphQL/codegen.yml"
-
   },
   "eslintConfig": {
     "extends": "react-app"

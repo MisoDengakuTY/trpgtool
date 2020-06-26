@@ -6,6 +6,8 @@ import {
 //  Link
 } from "react-router-dom";
 
+import { createClient, Provider } from 'urql';
+
 
 import './App.css';
 
@@ -21,6 +23,10 @@ import Shinobigami from './pages/shinobigami/Shinobigami';
 import Insane from './pages/insane/Insane';
 import Dice from './pages/dice/Dice';
 import Load from './pages/load/Load';
+
+const client = createClient({ url: 'http://localhost:3000/graphql' });
+
+
 
 const Routing = () =>{
   return (
@@ -40,8 +46,8 @@ const Routing = () =>{
 
 const App : React.FC = () => {
   return (
+    <Provider value={client}>
     <div className="App">
-    
       <Container>
       <Header><NavBar/></Header>
       <Container>
@@ -49,8 +55,8 @@ const App : React.FC = () => {
       <Content><Routing /></Content>
       </Container>
       </Container>
-
     </div>
+    </Provider>
   );
 }
 
