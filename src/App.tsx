@@ -6,7 +6,10 @@ import {
 //  Link
 } from "react-router-dom";
 
-import { createClient, Provider } from 'urql';
+import {HASURA_GRAPHQL_URI,HASURA_GRAPHQL_ADMIN_SECRET} from './hasura'; //内容漏れたら死ゾ
+
+import ApolloClient from 'apollo-boost';
+import { ApolloProvider } from '@apollo/react-hooks';
 
 
 import './App.css';
@@ -24,8 +27,14 @@ import Insane from './pages/insane/Insane';
 import Dice from './pages/dice/Dice';
 import Load from './pages/load/Load';
 
-const client = createClient({ url: 'http://localhost:3000/graphql' });
 
+const client = new ApolloClient({
+  uri: HASURA_GRAPHQL_URI, 
+  // GraphQLサーバーのエンドポイントを設定 Hasuraなのでコンソールをワイが起動しな使えん
+  headers:{
+    'x-hasura-access-key': HASURA_GRAPHQL_ADMIN_SECRET
+  }
+});
 
 
 const Routing = () =>{
@@ -46,7 +55,7 @@ const Routing = () =>{
 
 const App : React.FC = () => {
   return (
-    <Provider value={client}>
+    <ApolloProvider client={client}>
     <div className="App">
       <Container>
       <Header><NavBar/></Header>
@@ -56,7 +65,7 @@ const App : React.FC = () => {
       </Container>
       </Container>
     </div>
-    </Provider>
+    </ApolloProvider>
   );
 }
 

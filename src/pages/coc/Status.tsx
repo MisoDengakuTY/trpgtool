@@ -1,31 +1,33 @@
 import React from 'react';
 import { InputNumber, Input} from 'rsuite';
+import { useQuery } from '@apollo/react-hooks';
+import gql from 'graphql-tag';
 
-interface status{
-    STR : number;
-    CON : number;
-    POW : number;
-    DEX : number;
-    APP : number;
-    SIZE : number;
-    INT : number;
-    EDU : number;
-}
+const GET_STATUS = gql`
+    query MyQuery {
+        CoCCharacters_by_pk(id: 1) {
+            str
+            con
+            pow
+            dex
+            app
+            size
+            int
+            edu
+        }
+    }
+`;
+
+
 
 const Status = () =>{
     const styles = { 
         marginBottom: 10 }
 
-    const data =  {
-        STR : "13",
-        CON : "13",
-        POW : "13",
-        DEX : "13",
-        APP : "13",
-        SIZE : "13",
-        INT : "13",
-        EDU : "13",
-    }
+    const { loading, error, data } = useQuery(GET_STATUS);
+
+    if (loading) return <p>Loading...</p>; // fetch
+    if (error) return <p>fuck you... {error.message} </p>; //error
     
     return(
     <div className = "statusTable">
@@ -66,14 +68,14 @@ const Status = () =>{
 
     <tr>
     <td className="tableLeft">現在値</td>
-    <td> <Input value={data.STR} disabled /> </td>
-    <td> <Input value={data.CON} disabled /> </td>
-    <td> <Input value={data.POW} disabled /> </td>
-    <td> <Input value={data.DEX} disabled /> </td>
-    <td> <Input value={data.APP} disabled /> </td>
-    <td> <Input value={data.SIZE} disabled /> </td>
-    <td> <Input value={data.INT} disabled /> </td>
-    <td> <Input value={data.EDU} disabled /> </td>
+    <td> <Input value={"10"} disabled /> </td>
+    <td> <Input value={data.CoCCharacters_by_pk.con} disabled /> </td>
+    <td> <Input value={data.CoCCharacters_by_pk.pow} disabled /> </td>
+    <td> <Input value={data.CoCCharacters_by_pk.dex} disabled /> </td>
+    <td> <Input value={data.CoCCharacters_by_pk.app} disabled /> </td>
+    <td> <Input value={data.CoCCharacters_by_pk.size} disabled /> </td>
+    <td> <Input value={data.CoCCharacters_by_pk.int} disabled /> </td>
+    <td> <Input value={data.CoCCharacters_by_pk.edu} disabled /> </td>
     </tr>
     </table>
     </div>
