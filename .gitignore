@@ -1,4 +1,4 @@
 node_modules
 build
 dist
-./src/hasura.ts
+/src/hasura.ts
