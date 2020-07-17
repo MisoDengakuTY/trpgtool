@@ -28,14 +28,6 @@ import Dice from './pages/dice/Dice';
 import Load from './pages/load/Load';
 
 
-const client = new ApolloClient({
-  uri: HASURA_GRAPHQL_URI, 
-  // GraphQLサーバーのエンドポイントを設定 Hasuraなのでコンソールをワイが起動しな使えん
-  headers:{
-    'x-hasura-access-key': HASURA_GRAPHQL_ADMIN_SECRET
-  }
-});
-
 
 const Routing = () =>{
   return (
@@ -55,7 +47,6 @@ const Routing = () =>{
 
 const App : React.FC = () => {
   return (
-    <ApolloProvider client={client}>
     <div className="App">
       <Container>
       <Header><NavBar/></Header>
@@ -65,7 +56,7 @@ const App : React.FC = () => {
       </Container>
       </Container>
     </div>
-    </ApolloProvider>
+    
   );
 }
 

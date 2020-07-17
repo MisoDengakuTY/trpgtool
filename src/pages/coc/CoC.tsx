@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState} from 'react';
 
 import Status from './Status';
 import San from './San';
@@ -10,13 +10,22 @@ import Personal from './Personal';
 
 import './CoC.css';
 
+import "./../../dbtype/cocCharacter";
+
+import initialState from "./initialStatus";
+
+const Database = require("nedb");
+let db = new Database({ filename: "./../../localdb/cocCharacters.db", autoload: true });
+
+
 const CoC = () => {
+    const [state,setState] = useState(initialState)
     return (
         <div className="CoC">
         <h1> CoC </h1>
-        <Status />
+        <Status status={state["statuses"]} stateFunc={setState}/>
         <San />
-        <Skill />
+        <Skill skill={state["skills"]}/>
         <Combat />
         <Belongings />
         <Personal />

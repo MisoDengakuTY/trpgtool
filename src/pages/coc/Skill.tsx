@@ -1,75 +1,11 @@
-import React from 'react';
+import React,{useState} from 'react';
 import { InputNumber, Input} from 'rsuite';
-import { useQuery } from '@apollo/react-hooks';
-import gql from 'graphql-tag';
 
-//id 1だけ呼ぶ
-const GET_SKILL = gql`
-    query MyQuery {
-  CoCSkills_by_pk(id: 1) {
-    accounting
-    anthropology
-    archaeology
-    art
-    astronomy
-    bargain
-    biology
-    chemistry
-    climb
-    computer
-    conceal
-    craft
-    creditRating
-    cthulhuMythos
-    disguise
-    dodge
-    driveAutomobile
-    electricalRepair
-    fastTalk
-    firstAid
-    geology
-    grapple
-    handgun
-    headButt
-    hide
-    history
-    jump
-    kick
-    law
-    libraryUse
-    listen
-    locksmith
-    machineGun
-    martialArts
-    mechanicalRepair
-    medicine
-    naturalHistory
-    navigate
-    occult
-    operateHeavyMachine
-    otherLanguage
-    ownLanguage
-    persuade
-    pharmacy
-    photography
-    physics
-    pilot
-    psychoanalysis
-    psychology
-    punch
-    ride
-    rifle
-    shotgun
-    sneak
-    spotHidden
-    submachineGun
-    swim
-    throw
-    track
-  }
+import {SkillType} from "./../../dbtype/cocCharacter";
+
+interface propsType{
+    skill : SkillType[]
 }
-
-`
 
 interface skill{
     name : String,
@@ -99,39 +35,142 @@ const allSkill : Array<skill> = [
     {name : "ライフル", key : "rifle",init : 25, job : 0, interest : 0, growth : 0, other : 0, sum : 0},
 ]
 
+const undefined2zero = (i : number | undefined) => {
+    if(i === undefined) {return "";}
+    else {return i+'';}
+}
+const undefinedAdd = (a : number | undefined, b : number | undefined) => {
+    if(a === undefined){
+        a = 0
+    }
+    if(b === undefined){
+        b = 0
+    }
+    return a + b;
+}
 
-const Skill = () => {
+const Skill: React.FC<propsType> = (props) => {
 
+    const [skills,setSkill] = useState(props.skill)
 
-    const { loading, error, data } = useQuery(GET_SKILL);
-
-    if (loading) return <p>Loading...</p>; // fetch
-    if (error) return <p>fuck you... {error.message} </p>; //error
-    
-    const showSkill = allSkill.map(t =>
+    const showSkill = skills.map(t => 
     <tr>
-    <td> {t.name} </td>
-    <td> {t.init} </td>
-    <td> {t.job} </td>
-    <td> {t.interest} </td> 
-    <td> {t.growth} </td>
-    <td> {t.other} </td>
-    <td> {data.CoCSkills_by_pk[t.key]} </td>
+    <td> {t["skillName"]} </td>
+    <td> {t["initialPoint"]} </td>
+    <td> <Input value={undefined2zero(t["jobPoint"])} onChange={
+        (value) => {
+            let insert
+            if(isNaN(parseInt(value,10)) == false){
+                insert = parseInt(value,10)
+            }else{
+                insert = undefined
+            }
+            const replace : SkillType = {   
+            "skillId" : t["skillId"],
+            "skillName" : t["skillName"],
+            "initialPoint" : t["initialPoint"],
+            "jobPoint" : insert,
+            "interestPoint" : t["interestPoint"],
+            "growthPoint" : t["growthPoint"],
+            "other": t["other"]
+            }
+            let newSkill = [...skills]
+            newSkill[t["skillId"]] = replace
+            setSkill(newSkill)
+        } 
+        
+        }  /> </td>
+
+        <td> <Input value={undefined2zero(t["interestPoint"])} onChange={
+        (value) => {
+            let insert
+            if(isNaN(parseInt(value,10)) == false){
+                insert = parseInt(value,10)
+            }else{
+                insert = undefined
+            }
+            const replace : SkillType = {   
+            "skillId" : t["skillId"],
+            "skillName" : t["skillName"],
+            "initialPoint" : t["initialPoint"],
+            "jobPoint" : t["jobPoint"],
+            "interestPoint" : insert,
+            "growthPoint" : t["growthPoint"],
+            "other": t["other"]
+            }
+            let newSkill = [...skills]
+            newSkill[t["skillId"]] = replace
+            setSkill(newSkill)
+        } 
+        
+        }  /> </td> 
+
+        <td> <Input value={undefined2zero(t["growthPoint"])} onChange={
+        (value) => {
+            let insert
+            if(isNaN(parseInt(value,10)) == false){
+                insert = parseInt(value,10)
+            }else{
+                insert = undefined
+            }
+            const replace : SkillType = {   
+            "skillId" : t["skillId"],
+            "skillName" : t["skillName"],
+            "initialPoint" : t["initialPoint"],
+            "jobPoint" : t["jobPoint"],
+            "interestPoint" : t["interestPoint"],
+            "growthPoint" : insert,
+            "other": t["other"]
+            }
+            let newSkill = [...skills]
+            newSkill[t["skillId"]] = replace
+            setSkill(newSkill)
+        } 
+        
+        }  /> </td> 
+        
+        <td> <Input value={undefined2zero(t["other"])} onChange={
+        (value) => {
+            let insert
+            if(isNaN(parseInt(value,10)) == false){
+                insert = parseInt(value,10)
+            }else{
+                insert = undefined
+            }
+            const replace : SkillType = {   
+            "skillId" : t["skillId"],
+            "skillName" : t["skillName"],
+            "initialPoint" : t["initialPoint"],
+            "jobPoint" : t["jobPoint"],
+            "interestPoint" : t["interestPoint"],
+            "growthPoint" : t["growthPoint"],
+            "other": insert
+            }
+            let newSkill = [...skills]
+            newSkill[t["skillId"]] = replace
+            setSkill(newSkill)
+        } 
+        
+        }  /> </td>
+    <td>{undefinedAdd(t["initialPoint"],undefinedAdd(t["jobPoint"],undefinedAdd(t["interestPoint"],undefinedAdd(t["growthPoint"],t["other"]))))}</td>
     </tr>
     )
+    
 
 
     return(
+        <div>
         <table className = "skillTable"> 
-    <th>技能</th>
-    <th>初期値</th>
-    <th>職業P</th>
-    <th>興味P</th>
-    <th>成長分</th>
-    <th>その他</th>
-    <th>合計</th>    
+        <th>技能</th>
+        <th>初期値</th>
+        <th>職業P</th>
+        <th>興味P</th>
+        <th>成長分</th>
+        <th>その他</th>
+        <th>合計</th>    
         {showSkill}
         </table>
+        </div>
     )
 }
 
