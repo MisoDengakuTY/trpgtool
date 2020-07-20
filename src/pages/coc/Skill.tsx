@@ -47,116 +47,121 @@ const undefinedAdd = (a : number | undefined, b : number | undefined) => {
 }
 
 const Skill: React.FC = () => {
-    const {characterdata,setCharacterData} = useContext(CharacterData)
+    const {characterdata,setCharacterData, diceRollHandler} = useContext(CharacterData)
 
-    const showSkill = characterdata["skills"].map(t => 
-    <tr>
-    <td> {t["skillName"]} </td>
-    <td> {t["initialPoint"]} </td>
-    <td> <Input value={undefined2zero(t["jobPoint"])} onChange={
-        (value) => {
-            let insert
-            if(isNaN(parseInt(value,10)) == false){
-                insert = parseInt(value,10)
-            }else{
-                insert = undefined
-            }
-            const replace : SkillType = {   
-            "skillId" : t["skillId"],
-            "skillName" : t["skillName"],
-            "initialPoint" : t["initialPoint"],
-            "jobPoint" : insert,
-            "interestPoint" : t["interestPoint"],
-            "growthPoint" : t["growthPoint"],
-            "other": t["other"]
-            }
-            let newSkill = {...characterdata}
-            newSkill["skills"][t["skillId"]] = replace
-            setCharacterData(newSkill)
-        } 
-        
-        }  /> </td>
+    const showSkill = characterdata["skills"].map(t => {
+        const skillSum = undefinedAdd(t["initialPoint"],undefinedAdd(t["jobPoint"],undefinedAdd(t["interestPoint"],undefinedAdd(t["growthPoint"],t["other"]))))
+        return (
+        <tr key={t.skillId}>
 
-        <td> <Input value={undefined2zero(t["interestPoint"])} onChange={
-        (value) => {
-            let insert
-            if(isNaN(parseInt(value,10)) == false){
-                insert = parseInt(value,10)
-            }else{
-                insert = undefined
-            }
-            const replace : SkillType = {   
-            "skillId" : t["skillId"],
-            "skillName" : t["skillName"],
-            "initialPoint" : t["initialPoint"],
-            "jobPoint" : t["jobPoint"],
-            "interestPoint" : insert,
-            "growthPoint" : t["growthPoint"],
-            "other": t["other"]
-            }
-            let newSkill = {...characterdata}
-            newSkill["skills"][t["skillId"]] = replace
-            setCharacterData(newSkill)
-        } 
-        
-        }  /> </td> 
+            {/* 技能名をクリックすると技能ダイスロールが走るようにする */}
+            <td onClick={() => {diceRollHandler(1, 100, `《${t["skillName"]}》の技能ロール`, skillSum) }}>{t["skillName"]} </td>
+            
+            <td> {t["initialPoint"]} </td>
+            <td> <Input value={undefined2zero(t["jobPoint"])} onChange={
+                (value) => {
+                    let insert
+                    if(isNaN(parseInt(value,10)) == false){
+                        insert = parseInt(value,10)
+                    }else{
+                        insert = undefined
+                    }
+                    const replace : SkillType = {   
+                    "skillId" : t["skillId"],
+                    "skillName" : t["skillName"],
+                    "initialPoint" : t["initialPoint"],
+                    "jobPoint" : insert,
+                    "interestPoint" : t["interestPoint"],
+                    "growthPoint" : t["growthPoint"],
+                    "other": t["other"]
+                    }
+                    let newSkill = {...characterdata}
+                    newSkill["skills"][t["skillId"]] = replace
+                    setCharacterData(newSkill)
+                } 
+                
+                }  /> </td>
 
-        <td> <Input value={undefined2zero(t["growthPoint"])} onChange={
-        (value) => {
-            let insert
-            if(isNaN(parseInt(value,10)) == false){
-                insert = parseInt(value,10)
-            }else{
-                insert = undefined
-            }
-            const replace : SkillType = {   
-            "skillId" : t["skillId"],
-            "skillName" : t["skillName"],
-            "initialPoint" : t["initialPoint"],
-            "jobPoint" : t["jobPoint"],
-            "interestPoint" : t["interestPoint"],
-            "growthPoint" : insert,
-            "other": t["other"]
-            }
-            let newSkill = {...characterdata}
-            newSkill["skills"][t["skillId"]] = replace
-            setCharacterData(newSkill)
-        } 
-        
-        }  /> </td> 
-        
-        <td> <Input value={undefined2zero(t["other"])} onChange={
-        (value) => {
-            let insert
-            if(isNaN(parseInt(value,10)) == false){
-                insert = parseInt(value,10)
-            }else{
-                insert = undefined
-            }
-            const replace : SkillType = {   
-            "skillId" : t["skillId"],
-            "skillName" : t["skillName"],
-            "initialPoint" : t["initialPoint"],
-            "jobPoint" : t["jobPoint"],
-            "interestPoint" : t["interestPoint"],
-            "growthPoint" : t["growthPoint"],
-            "other": insert
-            }
-            let newSkill = {...characterdata}
-            newSkill["skills"][t["skillId"]] = replace
-            setCharacterData(newSkill)
-        } 
-        
-        }  /> </td>
-    <td>{undefinedAdd(t["initialPoint"],undefinedAdd(t["jobPoint"],undefinedAdd(t["interestPoint"],undefinedAdd(t["growthPoint"],t["other"]))))}</td>
-    </tr>
-    )
+                <td> <Input value={undefined2zero(t["interestPoint"])} onChange={
+                (value) => {
+                    let insert
+                    if(isNaN(parseInt(value,10)) == false){
+                        insert = parseInt(value,10)
+                    }else{
+                        insert = undefined
+                    }
+                    const replace : SkillType = {   
+                    "skillId" : t["skillId"],
+                    "skillName" : t["skillName"],
+                    "initialPoint" : t["initialPoint"],
+                    "jobPoint" : t["jobPoint"],
+                    "interestPoint" : insert,
+                    "growthPoint" : t["growthPoint"],
+                    "other": t["other"]
+                    }
+                    let newSkill = {...characterdata}
+                    newSkill["skills"][t["skillId"]] = replace
+                    setCharacterData(newSkill)
+                } 
+                
+                }  /> </td> 
+
+                <td> <Input value={undefined2zero(t["growthPoint"])} onChange={
+                (value) => {
+                    let insert
+                    if(isNaN(parseInt(value,10)) == false){
+                        insert = parseInt(value,10)
+                    }else{
+                        insert = undefined
+                    }
+                    const replace : SkillType = {   
+                    "skillId" : t["skillId"],
+                    "skillName" : t["skillName"],
+                    "initialPoint" : t["initialPoint"],
+                    "jobPoint" : t["jobPoint"],
+                    "interestPoint" : t["interestPoint"],
+                    "growthPoint" : insert,
+                    "other": t["other"]
+                    }
+                    let newSkill = {...characterdata}
+                    newSkill["skills"][t["skillId"]] = replace
+                    setCharacterData(newSkill)
+                } 
+                
+                }  /> </td> 
+                
+                <td> <Input value={undefined2zero(t["other"])} onChange={
+                (value) => {
+                    let insert
+                    if(isNaN(parseInt(value,10)) == false){
+                        insert = parseInt(value,10)
+                    }else{
+                        insert = undefined
+                    }
+                    const replace : SkillType = {   
+                    "skillId" : t["skillId"],
+                    "skillName" : t["skillName"],
+                    "initialPoint" : t["initialPoint"],
+                    "jobPoint" : t["jobPoint"],
+                    "interestPoint" : t["interestPoint"],
+                    "growthPoint" : t["growthPoint"],
+                    "other": insert
+                    }
+                    let newSkill = {...characterdata}
+                    newSkill["skills"][t["skillId"]] = replace
+                    setCharacterData(newSkill)
+                } 
+                
+                }  /> </td>
+            <td>{skillSum}</td>
+        </tr>)
+    })
     
 
 
     return(
         <div>
-        <table className = "skillTable"> 
+        <table className = "skillTable">
         <th>技能</th>
         <th>初期値</th>
         <th>職業P</th>
