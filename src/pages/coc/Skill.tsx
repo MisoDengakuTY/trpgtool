@@ -1,11 +1,8 @@
-import React,{useState} from 'react';
-import { InputNumber, Input} from 'rsuite';
+import React,{useState,useContext} from 'react';
+import {Input} from 'rsuite';
 
 import {SkillType} from "./../../dbtype/cocCharacter";
-
-interface propsType{
-    skill : SkillType[]
-}
+import {CharacterData} from './CoC';
 
 interface skill{
     name : String,
@@ -49,11 +46,10 @@ const undefinedAdd = (a : number | undefined, b : number | undefined) => {
     return a + b;
 }
 
-const Skill: React.FC<propsType> = (props) => {
+const Skill: React.FC = () => {
+    const {characterdata,setCharacterData} = useContext(CharacterData)
 
-    const [skills,setSkill] = useState(props.skill)
-
-    const showSkill = skills.map(t => 
+    const showSkill = characterdata["skills"].map(t => 
     <tr>
     <td> {t["skillName"]} </td>
     <td> {t["initialPoint"]} </td>
@@ -74,9 +70,9 @@ const Skill: React.FC<propsType> = (props) => {
             "growthPoint" : t["growthPoint"],
             "other": t["other"]
             }
-            let newSkill = [...skills]
-            newSkill[t["skillId"]] = replace
-            setSkill(newSkill)
+            let newSkill = {...characterdata}
+            newSkill["skills"][t["skillId"]] = replace
+            setCharacterData(newSkill)
         } 
         
         }  /> </td>
@@ -98,9 +94,9 @@ const Skill: React.FC<propsType> = (props) => {
             "growthPoint" : t["growthPoint"],
             "other": t["other"]
             }
-            let newSkill = [...skills]
-            newSkill[t["skillId"]] = replace
-            setSkill(newSkill)
+            let newSkill = {...characterdata}
+            newSkill["skills"][t["skillId"]] = replace
+            setCharacterData(newSkill)
         } 
         
         }  /> </td> 
@@ -122,9 +118,9 @@ const Skill: React.FC<propsType> = (props) => {
             "growthPoint" : insert,
             "other": t["other"]
             }
-            let newSkill = [...skills]
-            newSkill[t["skillId"]] = replace
-            setSkill(newSkill)
+            let newSkill = {...characterdata}
+            newSkill["skills"][t["skillId"]] = replace
+            setCharacterData(newSkill)
         } 
         
         }  /> </td> 
@@ -146,9 +142,9 @@ const Skill: React.FC<propsType> = (props) => {
             "growthPoint" : t["growthPoint"],
             "other": insert
             }
-            let newSkill = [...skills]
-            newSkill[t["skillId"]] = replace
-            setSkill(newSkill)
+            let newSkill = {...characterdata}
+            newSkill["skills"][t["skillId"]] = replace
+            setCharacterData(newSkill)
         } 
         
         }  /> </td>

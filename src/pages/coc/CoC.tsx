@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState,createContext} from 'react';
 
 import Status from './Status';
 import San from './San';
@@ -13,22 +13,35 @@ import './CoC.css';
 import "./../../dbtype/cocCharacter";
 
 import initialState from "./initialStatus";
+import { CoCCharacterType } from '../../dbtype/cocCharacter';
+
 
 const Database = require("nedb");
 let db = new Database({ filename: "./../../localdb/cocCharacters.db", autoload: true });
 
+interface ContextType  {
+    characterdata : CoCCharacterType,
+    setCharacterData : React.Dispatch<React.SetStateAction<CoCCharacterType>>
+}
+
+
+export const CharacterData = createContext({} as ContextType)
 
 const CoC = () => {
-    const [state,setState] = useState(initialState)
+    const [characterdata,setCharacterData] = useState(initialState)
+    const value = {characterdata,setCharacterData};
+    
     return (
         <div className="CoC">
         <h1> CoC </h1>
-        <Status status={state["statuses"]} stateFunc={setState}/>
+        <CharacterData.Provider value={value} >
+        <Status />
         <San />
-        <Skill skill={state["skills"]}/>
+        <Skill/>
         <Combat />
         <Belongings />
         <Personal />
+        </CharacterData.Provider>
         </div>
 
     )

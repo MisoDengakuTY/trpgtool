@@ -1,16 +1,7 @@
-import React,{useState} from 'react';
+import React,{useState,useContext} from 'react';
 import { InputNumber, Input,Button} from 'rsuite';
 import {StatusType} from "./../../dbtype/cocCharacter";
-
-interface propsType{
-    status: StatusType[],
-    stateFunc : any,
-};
-
-interface statusSumType{
-    [s: string]: number | undefined
-}
-
+import {CharacterData} from './CoC';
 
 
 const undefined2zero = (i : number | undefined) => {
@@ -29,14 +20,14 @@ const undefinedAdd = (a : number | undefined, b : number | undefined) => {
 }
 
 
-const Status:React.FC<propsType> = (props) =>{
-    const [statuses,setStatus] = useState(props.status)
-    
+const Status:React.FC = () =>{
+    const {characterdata,setCharacterData} = useContext(CharacterData)
+
     const styles = { 
         marginBottom: 10 }
     
-    const head = statuses.map(t => <th>{t["statusName"]}</th>);
-    const showInitStatus = statuses.map(t => <td>
+    const head = characterdata["statuses"].map(t => <th>{t["statusName"]}</th>);
+    const showInitStatus = characterdata["statuses"].map(t => <td>
         <InputNumber style={styles} value={undefined2zero(t["statusPoint"])} onChange={
         (value : any) => {
             let insert
@@ -54,14 +45,19 @@ const Status:React.FC<propsType> = (props) =>{
                 "max" : t["max"],
                 "min" : t["min"]
             }
-            let newStatus = [...statuses]
-            newStatus[t["statusId"]] = replace
-            setStatus(newStatus)
+            let newStatus = {...characterdata}
+            newStatus["statuses"][t["statusId"]] = replace
+            
+            newStatus["skills"][0]["initialPoint"] = 
+            2 * undefinedAdd(newStatus["statuses"][3]["statusPoint"],
+            undefinedAdd(newStatus["statuses"][3]["otherFluctuation"],newStatus["statuses"][3]["temporaryFluctuation"]))
+                        
+            setCharacterData(newStatus)
         }
         } min={t["min"]} max={t["max"]}/>
         </td>)
 
-    const showOtherStatus = statuses.map(t => 
+    const showOtherStatus = characterdata["statuses"].map(t => 
     <td><InputNumber style={styles} value={undefined2zero(t["otherFluctuation"])} onChange={
         (value : any) => {
             let insert
@@ -79,13 +75,19 @@ const Status:React.FC<propsType> = (props) =>{
                 "max" : t["max"],
                 "min" : t["min"]
             }
-            let newStatus = [...statuses]
-            newStatus[t["statusId"]] = replace
-            setStatus(newStatus)
+            let newStatus = {...characterdata}
+            newStatus["statuses"][t["statusId"]] = replace
+
+            newStatus["skills"][0]["initialPoint"] = 
+            2 * undefinedAdd(newStatus["statuses"][3]["statusPoint"],
+            undefinedAdd(newStatus["statuses"][3]["otherFluctuation"],newStatus["statuses"][3]["temporaryFluctuation"]))
+            
+
+            setCharacterData(newStatus)
         }
     }/> </td>)
 
-    const showTemporaryStatus = statuses.map(t => 
+    const showTemporaryStatus = characterdata["statuses"].map(t => 
         <td><InputNumber style={styles} value={undefined2zero(t["temporaryFluctuation"])} onChange={
             (value : any) => {
                 let insert
@@ -103,9 +105,14 @@ const Status:React.FC<propsType> = (props) =>{
                     "max" : t["max"],
                     "min" : t["min"]
                 }
-                let newStatus = [...statuses]
-                newStatus[t["statusId"]] = replace
-                setStatus(newStatus)
+                let newStatus = {...characterdata}
+                newStatus["statuses"][t["statusId"]] = replace
+
+                newStatus["skills"][0]["initialPoint"] = 
+                2 * undefinedAdd(newStatus["statuses"][3]["statusPoint"],
+                undefinedAdd(newStatus["statuses"][3]["otherFluctuation"],newStatus["statuses"][3]["temporaryFluctuation"]))
+                
+                setCharacterData(newStatus)
             }
         }/> </td>)
     return(
@@ -132,7 +139,7 @@ const Status:React.FC<propsType> = (props) =>{
     
     <tr>
     <td className="tableLeft">現在値</td>
-    {statuses.map(t => <td> {Math.max(0,undefinedAdd(t["statusPoint"],undefinedAdd(t["otherFluctuation"],t["temporaryFluctuation"])))} </td>)}
+    {characterdata["statuses"].map(t => <td> {Math.max(0,undefinedAdd(t["statusPoint"],undefinedAdd(t["otherFluctuation"],t["temporaryFluctuation"])))} </td>)}
     </tr>
 
     </table>
