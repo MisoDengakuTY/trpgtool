@@ -1,8 +1,10 @@
 import React,{useState,createContext} from 'react';
 
 import Status from './Status';
+import StatusChart from './StatusChart';
 import San from './San';
 import Skill from './Skill';
+
 import Combat from './Combat';
 import Belongings from './Belongings';
 import Personal from './Personal';
@@ -45,6 +47,7 @@ const CoC = () => {
                 <h1> CoC </h1>
                 <CharacterData.Provider value={value} >
                     <Status />
+                    <StatusChart />
                     <San />
                     <Skill />
                     <Combat />
