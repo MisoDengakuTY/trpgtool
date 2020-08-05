@@ -1,5 +1,6 @@
 import React from 'react'
 import { Navbar,Nav,Icon,Dropdown } from 'rsuite';
+import AuthComponent from './AuthComponent';
 
 interface ItemsType {
   name: string,
@@ -37,6 +38,7 @@ const NavBar = () => {
 
       </Nav>
       <Nav pullRight>
+        <AuthComponent/>
         <Nav.Item icon={<Icon icon="cog" />} >Settings</Nav.Item>
       </Nav>
     </Navbar.Body>

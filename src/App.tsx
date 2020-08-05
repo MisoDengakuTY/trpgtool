@@ -6,7 +6,7 @@ import {
 //  Link
 } from "react-router-dom";
 
-import {HASURA_GRAPHQL_URI,HASURA_GRAPHQL_ADMIN_SECRET} from './hasura'; //内容漏れたら死ゾ
+// import {HASURA_GRAPHQL_URI,HASURA_GRAPHQL_ADMIN_SECRET} from './hasura'; //内容漏れたら死ゾ
 
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider } from '@apollo/react-hooks';
