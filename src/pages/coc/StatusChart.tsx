@@ -2,10 +2,6 @@ import React,{useContext} from 'react';
 import {CharacterData} from './CoC';
 import {Radar} from 'react-chartjs-2';
 
-const undefined2zero = (i : number | undefined) => {
-    if(i === undefined) {return "";}
-    else {return i+'';}
-}
 
 const undefinedAdd = (a : number | undefined, b : number | undefined) => {
     if(a === undefined){
@@ -18,24 +14,10 @@ const undefinedAdd = (a : number | undefined, b : number | undefined) => {
 }
 
 const StatusChart : React.FC = () => {
-    const styles = { 
-        marginBottom: 10 ,}
     
     const {characterdata,setCharacterData} = useContext(CharacterData)
     
-    const options = {
-        scale: {
-            angleLines: {
-                display: false
-            },
-            ticks: {
-                suggestedMin: 50,
-                suggestedMax: 100
-            }
-        }
-    };
     
-
     let data = {labels: characterdata["statuses"].map(t => t["statusName"]),
     datasets: [
         {

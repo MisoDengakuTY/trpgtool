@@ -1,4 +1,4 @@
-import React,{useState,useContext} from 'react';
+import React,{useContext} from 'react';
 import {Input} from 'rsuite';
 
 import {SkillType} from "./../../dbtype/cocCharacter";

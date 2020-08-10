@@ -1,5 +1,5 @@
-import React,{useState,useContext} from 'react';
-import { InputNumber, Input,Button} from 'rsuite';
+import React,{useContext} from 'react';
+import { InputNumber} from 'rsuite';
 import {StatusType} from "./../../dbtype/cocCharacter";
 import {CharacterData} from './CoC';
 
