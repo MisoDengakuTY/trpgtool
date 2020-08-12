@@ -1,4 +1,4 @@
-const Koa = require("koa");
+import * as  Koa from "koa";
 const BodyParser = require("koa-bodyparser");
 const Router = require("koa-router");
 const Logger = require("koa-logger");
@@ -25,8 +25,7 @@ app.use(cors());
 
 const router = new Router();
 
-router.get("/coc",async (ctx,next)=>{
-    const books = ["Speaking javascript", "Fluent Python", "Pro Python", "The Go programming language"];
+router.get("/coc",async (ctx : Koa.Context, next) =>{
     ctx.status = HttpStatus.OK;
     ctx.type = 'json';
     ctx.body = jsonObject;
@@ -35,13 +34,13 @@ router.get("/coc",async (ctx,next)=>{
 
 
 
-router.get("/insane/:id",async (ctx,next)=>{
+/* router.get("/insane/:id",async (ctx,next)=>{
     const books = ["Speaking javascript", "Fluent Python", "Pro Python", "The Go programming language"];
     ctx.status = HttpStatus.OK;
     ctx.body = ctx.params.id;
     await next();
 });
-
+ */
 
 
 

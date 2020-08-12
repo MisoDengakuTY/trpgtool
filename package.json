@@ -54,7 +54,7 @@
     }
   },
   "scripts": {
-    "start": "concurrently \"react-scripts start\" \"cd backend && nodemon server.js\"",
+    "start": "concurrently \"react-scripts start\" \"cd backend && nodemon server.ts\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
@@ -86,6 +86,7 @@
     "@graphql-codegen/typescript-react-apollo": "1.15.4",
     "@types/cors": "^2.8.7",
     "@types/express": "^4.17.7",
+    "@types/koa": "^2.11.3",
     "@types/mongoose": "^5.7.34",
     "chart.js": "^2.9.3",
     "concurrently": "^5.2.0",
