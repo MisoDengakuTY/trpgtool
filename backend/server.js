@@ -24,12 +24,7 @@ router.get("/coc/:id",async (ctx,next)=>{
     await next();
 });
 
-router.get("/shinobigami/:id",async (ctx,next)=>{
-    const books = ["Speaking javascript", "Fluent Python", "Pro Python", "The Go programming language"];
-    ctx.status = HttpStatus.OK;
-    ctx.body = ctx.params.id;
-    await next();
-});
+
 
 router.get("/insane/:id",async (ctx,next)=>{
     const books = ["Speaking javascript", "Fluent Python", "Pro Python", "The Go programming language"];
