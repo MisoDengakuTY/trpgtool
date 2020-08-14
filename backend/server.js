@@ -1,4 +1,6 @@
-import * as  Koa from "koa";
+const Koa = require("koa");
+
+const mongoose = require('mongoose');
 const BodyParser = require("koa-bodyparser");
 const Router = require("koa-router");
 const Logger = require("koa-logger");
@@ -6,8 +8,10 @@ const cors = require('koa-cors');
 const serve = require("koa-static");
 const mount = require("koa-mount");
 const HttpStatus = require("http-status");
-var mongoose = require('mongoose');
 
+
+
+const cocCharacterRoutes = require("./routes/cocCharacter.js");
 
 /////////////////////////test json file//////////////////////////////////////
 const fs = require('fs');
@@ -19,32 +23,25 @@ const app = new Koa();
 
 const PORT = process.env.PORT || 3001;
 
+
+/* MongoDB connection */
+const setting = require('./setting'); // setting.jsは漏れると困るのでignoreしてる
+mongoose.connect(`mongodb+srv://${setting.user}:${setting.password}@cluster0.3iieb.mongodb.net`, { useNewUrlParser: true });
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', () => {
+    console.log('connected');
+});
+
+
 app.use(BodyParser());
 app.use(Logger());
 app.use(cors());
 
-const router = new Router();
-
-router.get("/coc",async (ctx : Koa.Context, next) =>{
-    ctx.status = HttpStatus.OK;
-    ctx.type = 'json';
-    ctx.body = jsonObject;
-    await next();
-});
 
 
+app.use(cocCharacterRoutes.routes())
 
-/* router.get("/insane/:id",async (ctx,next)=>{
-    const books = ["Speaking javascript", "Fluent Python", "Pro Python", "The Go programming language"];
-    ctx.status = HttpStatus.OK;
-    ctx.body = ctx.params.id;
-    await next();
-});
- */
-
-
-
-app.use(router.routes()).use(router.allowedMethods());
   
 
 app.listen(PORT, function () {
