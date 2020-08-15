@@ -1,26 +1,27 @@
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import { Navbar,Nav,Icon,Dropdown } from 'rsuite';
 import AuthComponent from './AuthComponent';
 
-interface ItemsType {
-  name: string,
-  label: string
-}
+import axios from 'axios';
 
-interface PropsType{
-  Items : Array<ItemsType>
-}
+import { CoCCharacterType } from '../dbtype/cocCharacter';
 
-/* 
-const getListItem = (item:ItemsType) =>{
-  return(
-    <ListItem button key = {item.name}>
-      <ListItemText> {item.label} </ListItemText>
-    </ListItem>
+
+
+
+const Item = () =>{
+  const [show,setShow] = useState(<div></div>)
+  useEffect(() => {
+  axios.get(`http://localhost:3001/cocCharacter/`)
+  .then(res => {
+    const character : any = res.data;
+    setShow(character.map((t : CoCCharacterType) => <Dropdown.Item > {t["name"]} </Dropdown.Item>));
+  }
   )
+  },[]);
+  return (show);
 }
 
- */
 const NavBar = () => {
 
   return (
@@ -33,7 +34,13 @@ const NavBar = () => {
           <Dropdown.Item href = '/shinobigami'>シノビガミ</Dropdown.Item>
           <Dropdown.Item href = '/insane'>インセイン</Dropdown.Item>
         </Dropdown>
-        <Nav.Item href = '/load'>Load</Nav.Item>
+        <Dropdown title="Load">
+          <Dropdown.Menu title = "クトゥルフ神話TRPG">
+            <Item />
+          </Dropdown.Menu>
+          <Dropdown.Item >シノビガミ</Dropdown.Item>
+          <Dropdown.Item >インセイン</Dropdown.Item>
+        </Dropdown>
         <Nav.Item href = '/dice'>Dice</Nav.Item>
 
       </Nav>

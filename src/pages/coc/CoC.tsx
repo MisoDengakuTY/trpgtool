@@ -17,6 +17,8 @@ import "./../../dbtype/cocCharacter";
 import initialState from "./initialStatus";
 import { CoCCharacterType } from '../../dbtype/cocCharacter';
 
+import axios from 'axios';
+import {Button} from 'rsuite';
 
 const Database = require("nedb");
 let db = new Database({ filename: "./../../localdb/cocCharacters.db", autoload: true });
@@ -54,6 +56,13 @@ const CoC = () => {
                     <Belongings />
                     <Personal />
                     <DiceResultModal size="xs" resultStyle="(xDx)=>numbers(sum)<=(limit):(result)" diceState={state} onHide={() => setState({...state, show: false})} />
+                    <Button onClick={() => {
+                        axios.get(`http://localhost:3001/cocCharacter/0`)
+                        .then(res => {
+                        const character = res.data;
+                        setCharacterData(character[0]);
+                        })   
+                        }} >Load test</Button>
                 </CharacterData.Provider>
             </div>
         </div>
