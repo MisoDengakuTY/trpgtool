@@ -34,13 +34,7 @@ const NavBar = () => {
           <Dropdown.Item href = '/shinobigami'>シノビガミ</Dropdown.Item>
           <Dropdown.Item href = '/insane'>インセイン</Dropdown.Item>
         </Dropdown>
-        <Dropdown title="Load">
-          <Dropdown.Menu title = "クトゥルフ神話TRPG">
-            <Item />
-          </Dropdown.Menu>
-          <Dropdown.Item >シノビガミ</Dropdown.Item>
-          <Dropdown.Item >インセイン</Dropdown.Item>
-        </Dropdown>
+        <Nav.Item href = '/load'>Load</Nav.Item>
         <Nav.Item href = '/dice'>Dice</Nav.Item>
 
       </Nav>

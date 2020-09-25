@@ -1,7 +1,7 @@
 import {CoCCharacterType} from "./../../dbtype/cocCharacter";
 
 const initialState : CoCCharacterType = {
-        "id" : undefined,
+        "_id" : undefined,
         "name": undefined,
         "san": undefined,
         "statuses":[

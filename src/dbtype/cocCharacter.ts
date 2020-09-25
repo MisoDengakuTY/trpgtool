@@ -19,7 +19,7 @@ export interface SkillType{
 }
 
 export interface CoCCharacterType {
-    "id" : string | undefined,
+    "_id" : string | undefined,
     "name" : string | undefined,
     "san" : number | undefined,
     "statuses" : StatusType[],
